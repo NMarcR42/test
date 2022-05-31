@@ -1,0 +1,14 @@
+Menu cuisinier
+1xml
+
+Les plats 
+tableau des plats
+2xml
+
+Gerer-> Ajout ,modif , supp (chacun  son formulaire)
+5xml
+
+Proposition -> AJout , modif , supp (chacun son formulaire)
+8xml
+
+Pour le dernier point une assosiation (idservice, idplat, idCreneau, quantiteDisponible, quantiteVendue)

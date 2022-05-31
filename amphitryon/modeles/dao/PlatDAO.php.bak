@@ -1,0 +1,54 @@
+<?php
+require_once 'DBConnex.php';
+class PlatDAO {
+	
+	
+    public static function ajouter($idCategorie , $nomPlat, $descriptifPlat){
+        try{
+			
+            $sql2 = "insert into plat(idCategorie, nomPlat, descriptifPlat) VALUES(:categorie,:nom,:descriptif);" ;
+            $requetePrepa = DBConnex::getInstance()->prepare($sql2);
+            $requetePrepa->bindParam(":categorie", $idCategorie);
+            $requetePrepa->bindParam(":nom", $nomPlat);
+			$requetePrepa->bindParam(":descriptif", $descriptifPlat);
+            $reponse = $requetePrepa->execute();
+			
+        }catch(Exception $e){
+            $reponse = 0;
+        }
+        return $reponse;
+    }
+	public static function modifier($idCategorie , $nomPlat, $descriptifPlat){
+        try{
+			$sql="select idPlat from plat where nomPlat = :nom;";
+			//$sql2="select idCategorie from categorie_plat where ";
+			
+			$sql3="update plat set nomPlat= :nnom, idCategorie= :ncategorie, descriptifPlat= :ndescriptif where idPlat=".$sql"";
+			
+            //$sql4 = "select numEtudiant, nomEtudiant , prenomEtudiant , mailEtudiant ,
+            //bacEtudiant statut from etudiants
+            //where mailEtudiant= :login and mdpEtudiant = :mdp " ;
+            $requetePrepa = DBConnex::getInstance()->prepare($sql3);
+            $requetePrepa->bindParam("nnom", $nomPlat);
+            $requetePrepa->bindParam("ncategorie", $idCategorie);
+			$requetePrepa->bindParam("ndescriptif", $descriptifPlat);
+            $reponse = $requetePrepa->execute();
+        }catch(Exception $e){
+            $reponse = "";
+        }
+        return $reponse;
+    }
+
+	public static function supprimer($nomPlat){
+        try{		
+            $sql = "delete from plat where nomPlat = :nom;" ;
+            $requetePrepa = DBConnex::getInstance()->prepare($sql);
+            $requetePrepa->bindParam(":nom", $nomPlat);
+            $reponse = $requetePrepa->execute();
+        }catch(Exception $e){
+            $reponse = 0;
+        }
+        return $reponse;
+    }
+
+}
